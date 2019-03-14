@@ -1,0 +1,11 @@
+---
+- name: to demonstrate variables
+  hosts: webservers
+  #vars_files:
+  #  - myvars.yml
+  #vars:
+  #  package: auditd
+  tasks:
+    - name: ensure package {{package}}  is installed
+      debug:
+        msg: "{{ package }}"
