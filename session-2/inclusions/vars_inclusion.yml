@@ -1,0 +1,11 @@
+---
+- name: This play demonstrates variables inclusion from file
+  hosts: node1.example.com
+  tasks:
+  - name: include variables from vars1.yml
+    include_vars: vars/vars1.yml
+  
+  - name: debug the variables 
+    debug:
+      msg: >
+        "{{ packages['web_package'] }}     {{ packages['db_package'] }}

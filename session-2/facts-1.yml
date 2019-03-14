@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: This task gathers facts
+    setup:
+
+  - name: Print facts
+    debug:
+      msg: >
+        The name of this host is {{ ansible_fqdn }}
+        Its IP Address is {{ ansible_default_ipv4.address }} 

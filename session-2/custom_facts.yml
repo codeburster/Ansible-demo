@@ -1,0 +1,14 @@
+---
+- name: This playbook installs custom facts
+  hosts: node1.example.com
+  tasks:
+  - name: Create facts.d directory
+    file:
+      path: "/etc/ansible/facts.d"
+      state: "directory"
+
+  - name: Copy the fact file
+    copy:
+      src: myfacts.fact
+      dest: /etc/ansible/facts.d/myfacts.fact
+      mode: 0755

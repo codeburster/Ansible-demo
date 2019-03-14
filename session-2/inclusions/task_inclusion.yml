@@ -1,0 +1,11 @@
+---
+- name: This play demonstrates use of file inclusion
+  hosts: webserver
+  tasks:
+  - name: This task includes task from a task file
+    include: tasks/task1.yml
+    vars:
+      packages: httpd
+      service: httpd
+      state: started
+    register: result
