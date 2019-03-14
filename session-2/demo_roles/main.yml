@@ -1,0 +1,5 @@
+---
+- name: Demo for Ansible roles
+  hosts: all
+  roles:
+    - motd
