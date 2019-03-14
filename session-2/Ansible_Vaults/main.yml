@@ -1,0 +1,11 @@
+---
+- name: Demo for using Ansible vault
+  hosts: all
+  vars_files:
+    - secret.yml
+  tasks:
+    - name: Creating new users
+      user:
+        name: "{{ item.name }}"
+        password: "{{ item.pwd | password_hash('sha512') }}"
+      with_items: "{{ newusers }}"
