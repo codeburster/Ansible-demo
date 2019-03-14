@@ -1,0 +1,22 @@
+---
+- name: Demonstrating use of handlers
+  hosts: node1.example.com
+  tasks:
+  - name: Copy config file for webserver
+    copy:
+      src: files/web1.conf
+      dest: /etc/httpd/conf.d/web1.conf
+    notify:
+      - restart_service
+    register: result
+
+  - name: Another task
+    debug:
+      msg: >
+        "{{ result }}"
+
+  handlers:
+  - name: restart_service
+    service:
+      name: httpd
+      state: restarted

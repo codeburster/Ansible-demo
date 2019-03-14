@@ -1,0 +1,19 @@
+---
+- name: Demonstration for with_items key used for loop
+  hosts: node1.example.com
+  gather_facts: no
+  tasks:
+  - name: Postfix service status
+    command: systemctl is-active postfix
+    register: result
+    ignore_errors: yes
+
+  - debug:
+      msg: >
+        "{{ result }}"  
+    
+  - name: Restart service
+    service:
+      name: httpd
+      state: restarted
+    when: result.rc == 0

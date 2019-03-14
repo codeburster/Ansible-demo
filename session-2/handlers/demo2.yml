@@ -1,0 +1,33 @@
+---
+- name: Demonstrating use of forcing handlers
+  hosts: node1.example.com
+  force_handlers: yes
+  tasks:
+  - name: Copy config file for webserver
+    copy:
+      src: files/web1.conf
+      dest: /etc/httpd/conf.d/web1.conf
+    notify:
+      - restart_service
+    register: result
+
+  - name: Another task
+    debug:
+      msg: >
+        "{{ result }}"
+    notify: handler1
+
+  - name: this task fails
+    copy:
+      src: file does not exist
+      dest: somewhere
+
+  handlers:
+  - name: restart_service
+    service:
+      name: httpd
+      state: restarted
+  - name: handler1
+    service:
+      name: postfix
+      state: restarted

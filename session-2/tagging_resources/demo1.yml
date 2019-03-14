@@ -1,0 +1,21 @@
+---
+- name: Demonstrating tags in Ansible
+  hosts: node1.example.com
+  gather_facts: no
+  tasks:
+  - name: Installing packages
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - postfix
+      - httpd
+    tags:
+      - packages
+
+  - name: Services
+    service:
+      name: httpd
+      state: started
+    tags:
+      - services
